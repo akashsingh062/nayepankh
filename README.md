@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🕊️ NayePankh Foundation Web Portal
 
-## Getting Started
+[![Deployment Status](https://img.shields.io/badge/Vercel-Deployed-success?logo=vercel&logoColor=white)](https://nayepankh-three.vercel.app/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.9-black?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.19-38bdf8?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Database: Turso](https://img.shields.io/badge/Database-Turso%20%2F%20Prisma-4f46e5?logo=prisma&logoColor=white)](https://db.turso.tech/)
+[![Registered NGO](https://img.shields.io/badge/NGO-80G%20%26%2012A%20Registered-orange)](#)
 
-First, run the development server:
+A modern, responsive, and accessibility-prioritized (WCAG 2.2 AA compliant) web application built for **NayePankh Foundation**, a premier youth-led NGO registered with the Uttar Pradesh Government. The platform features an interactive storefront for public engagement (donation appeals, volunteer registration, certificates viewer) and a secure administrative dashboard.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+🌐 **Live Website**: [nayepankh-three.vercel.app](https://nayepankh-three.vercel.app/)
+
+---
+
+## 🌟 Key Features
+
+### 1. Storefront Pages (Public Face)
+* **Home Page**: Interactive counter cards showing NGO impact metrics, custom-designed registrations slider, and parallax banners with smooth transitions.
+* **About Us**: Clean, visual layout describing the foundation's history, mission statement, motto badge, and full-screen banner.
+* **Our Certificates**: High-contrast, grid-based interface displaying official registration and tax-exemption documents (12A, 80G).
+* **Newspaper Recognition**: Visual coverage grid showing the organization's press mentions in leading national publications.
+* **Volunteer Portal**: Multi-step application form with interactive skill-tag capsules, availability selector, field validations, and smooth automatic scroll-to-top on response states.
+* **Donate Page**: Clear donation appeal layout detailing payment channels and the tax benefits (50% relief under Section 80G) supporters receive.
+* **Compliance Policies**: Accessible policy pages outlining legal guidelines (Terms & Conditions, Privacy Policy, Shipping/Exchange, Refund policies).
+
+### 2. Admin Portal (Management Suite)
+* **Secure Login**: JWT-based secure administration authentication (`jose` + Next.js Middleware cookie checking).
+* **Interactive Dashboard**:
+  * **Overview Analytics**: Visual stats tracking volunteer signups, pending reviews, and approved candidates.
+  * **Volunteer Management**: Live-searchable registry of applicants with dynamic filters (status, search terms).
+  * **Status Toggles**: Instantly transition applicants between `Pending`, `Contacted`, `Approved`, or `Rejected`.
+  * **Data Export**: Built-in CSV parser to download complete registry details with one-click.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+* **Frontend Framework**: [Next.js 16.2 (App Router)](https://nextjs.org/) + React 19
+* **Styling & Theme**: Vanilla CSS Variables + [Tailwind CSS 3.4](https://tailwindcss.com/) (includes global Dark Mode switching and a custom unified layout token system)
+* **Database & ORM**: [Prisma ORM](https://www.prisma.io/) + [Turso LibSQL Database](https://turso.tech/)
+* **Authentication**: JWT verification cookies (`jose` + Web Middleware)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+Ensure you have **Node.js (v18+)** installed on your machine.
+
+### 2. Setup Local Environment Variables
+Create a `.env` file in the root directory and specify the following variables:
+```env
+# Database Credentials
+DATABASE_URL="file:./dev.db" # Replace with libSQL token URL for live staging
+LIBSQL_CLIENT_TOKEN=""       # Leave empty for local development file databases
+
+# JWT Security
+JWT_SECRET="your-super-secret-jwt-key"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Install & Generate Client
+Install the project dependencies and compile the Prisma client:
+```bash
+# Install dependencies
+npm install
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Generate database schema client
+npx prisma generate
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Database Setup & Migrations
+Sync the database schema using Prisma push:
+```bash
+# Push database structures
+npx prisma db push
+```
 
-## Learn More
+### 5. Run the Local Development Server
+Start the development compiler:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the site.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Deployment on Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The application is optimized for deployment on Vercel:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Connect your Github repository to Vercel.
+2. Specify the environment variables (`DATABASE_URL`, `LIBSQL_CLIENT_TOKEN`, and `JWT_SECRET`) in your Vercel project settings.
+3. The build configuration automatically runs `prisma generate` during both the `postinstall` hook and prefixed to the `build` command (`prisma generate && next build`), ensuring clean builds without compilation blocks.
