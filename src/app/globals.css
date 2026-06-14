@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 29 30 32;
+    --card-bg: 245 247 250;
+    --border-color: 226 232 240;
+    --primary-rgb: 255 159 67;
+  }
+
+  :root.dark {
+    --background: 24 25 26;
+    --foreground: 245 246 247;
+    --card-bg: 32 33 35;
+    --border-color: 48 49 51;
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid #ff9f43 !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Custom premium scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3b3e;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9f43;
+}
+
+/* Original Scroll Viewport Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay modifiers for sequential card animations */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Micro-interactions */
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ===== Dashboard-Specific Animations ===== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes barFill {
+  from {
+    width: 0%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 159, 67, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 159, 67, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.dash-fade-in {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dash-slide-in {
+  animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dash-bar-fill {
+  animation: barFill 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered animation delays for dashboard cards */
+.dash-delay-1 { animation-delay: 50ms; }
+.dash-delay-2 { animation-delay: 100ms; }
+.dash-delay-3 { animation-delay: 150ms; }
+.dash-delay-4 { animation-delay: 200ms; }
+.dash-delay-5 { animation-delay: 250ms; }
+.dash-delay-6 { animation-delay: 300ms; }
+
+/* Dashboard sidebar glassmorphism */
+.dash-sidebar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+:root.dark .dash-sidebar {
+  background: rgba(30, 31, 34, 0.92);
+}
+
+/* Dashboard bar chart animation */
+.dash-bar-animated {
+  animation: barFill 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Sidebar nav item active indicator */
+.dash-nav-active {
+  position: relative;
+}
+.dash-nav-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: #ff9f43;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ===== Storefront Subpages Top Offsets under Fixed Header ===== */
+
+/* Subpages with banner sections (extend banner under header) */
+main:not(.home-main):not(.dash-main) > section:first-child {
+  padding-top: 160px; /* 80px header height + 80px original py-20 */
+}
+
+/* Volunteer subpage layout adjustments */
+main.volunteer-main {
+  padding-top: 120px;
+}
