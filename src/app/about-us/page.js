@@ -53,7 +53,7 @@ export default function AboutUs() {
 
       <main className="flex-grow bg-white dark:bg-[#18191a] text-[#1d1e20] dark:text-[#f5f6f7] transition-colors duration-300">
         {/* Banner Section */}
-        <section className="relative py-20 border-b border-gray-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
+        <section className="relative min-h-[80vh] flex items-center justify-center py-20 border-b border-gray-200 dark:border-white/5 overflow-hidden transition-colors duration-300">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
@@ -62,7 +62,7 @@ export default function AboutUs() {
           />
           <div className="absolute inset-0 bg-black/65" />
 
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center z-10 space-y-4">
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center z-10 space-y-4 w-full">
             <span className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-primary">
               Who We Are
             </span>
